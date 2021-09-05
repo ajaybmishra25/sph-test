@@ -31,3 +31,13 @@ The block, when placed on any product page, automatically shows the currently di
 9. Your final submission is expected to contain a) Updated code of the module in this repository b) A link to the demo site c) Admin (uid=1) credentials to the demo site 
 
 Wish you the very best!
+============================================================================
+
+We need to follow below steps to test custom module developed for Product page.
+
+1> Install Drupal 8 vanilla site.
+2> Copy sph_product custom module into module's custom folder.
+3> Enable custom module.
+4> Navigate to front page for viewing products list.
+5> Click on Product title test Product page.
+6> Because of short of time, I utilised Drupal's default functionality of listing content on Home page and also not made much modification to Product page.
