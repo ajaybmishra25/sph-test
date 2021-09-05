@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+    config:
+        - field.field.node.sph_product.body
+        - node.type.sph_product
+    module:
+        - text
+        - user
+id: node.sph_product.default
+targetEntityType: node
+bundle: sph_product
+mode: default
+content:
+    body:
+        label: hidden
+        type: text_textarea_with_summary
+        weight: 101
+        settings: {  }
+        third_party_settings: {  }
+    field_image:
+        weight: 122
+        settings:
+          progress_indicator: throbber
+          preview_image_style: thumbnail
+        third_party_settings: {  }
+        type: image_image
+        region: content
+    links:
+        weight: 100
+hidden: {  }

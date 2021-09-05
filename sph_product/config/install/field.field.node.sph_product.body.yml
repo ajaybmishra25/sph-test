@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.sph_product
+  module:
+    - text
+id: node.sph_product.body
+field_name: body
+entity_type: node
+bundle: sph_product
+label: 'Product Description'
+description: 'Information about the Product.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

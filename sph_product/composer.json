@@ -1,0 +1,17 @@
+{
+    "name": "ajay.mishra/sph_product",
+    "description": "Library for QRCode display",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Ajay Mishra",
+            "email": "ajay.mishra@craftww.com"
+        }
+    ],
+    "require": {
+        "endroid/qr-code": "^3.5",
+        "ambengers/eloquent-pdf": "^1.1",
+        "calcinai/php-imagick": "^0.1.2",
+        "tecnickcom/tcpdf": "^6.4"
+    }
+}

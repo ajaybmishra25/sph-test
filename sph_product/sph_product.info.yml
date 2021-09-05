@@ -1,0 +1,8 @@
+name: SPH Product
+type: module
+description: 'A custom Product module to build Product listing and Product page'
+core: 8.x
+package: Custom
+dependencies:
+  - node
+

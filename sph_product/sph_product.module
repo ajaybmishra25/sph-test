@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * Implements hook_theme().
+ */
+ function sph_product_theme($existing, $type, $theme, $path) {
+
+ 	$module_handler = Drupal::service('module_handler');
+  	$path = $module_handler->getModule('sph_product')->getPath();
+
+	return 
+	[		
+	    'sph_product_theme_listing_page' => [
+	    	'render element' => 'children',
+	      	'template' => 'sph-product-theme-listing-page',
+	      	'path' => $path. '/templates',
+	      	'variables' => [
+	        	'products' => [],
+	    	],
+    	],
+	   
+  	];
+}
+

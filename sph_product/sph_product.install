@@ -1,0 +1,81 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the sph_product module.
+ */
+
+use \Drupal\file\Entity\File;
+/**
+ * Implements hook_install().
+ */
+function sph_product_install() {
+
+	$content_no = 1;
+
+	while($content_no <= 3) {
+		//Get Random object for Random description text for Product description
+		$random = new Drupal\Component\Utility\Random();
+		
+		//Gets the Module Path
+		$module_handler = \Drupal::service('module_handler');
+	 	$module_path = $module_handler->getModule('sph_product')->getPath();
+
+	 	//Gets the image directory inside custom module
+	 	$image_dir = $module_path.'/images/';
+
+	 	//Create Destination directory for image
+	 	$destination = 'public://product-images/';
+
+		file_prepare_directory($destination, FILE_CREATE_DIRECTORY);
+
+	 	$data = file_get_contents($image_dir. $content_no.'.jpeg');
+
+		$file = file_save_data($data, $destination. $content_no.'.jpeg');
+
+		// Create node object with attached file.
+		$node = Drupal\node\Entity\Node::create([
+		  'type' => 'sph_product',
+		  'uid' => 1,
+		  'revision' => 0,
+		  'status' => TRUE,
+		  'title' => 'Product '. $content_no,
+		  'body'     => ['value' => $random->paragraphs(6), 'format' => 'full_html'],
+		  'field_image' => [
+		    'target_id' => $file->id(),
+		    'alt' => 'Product '. $content_no,
+		    'title' => 'Product '. $content_no,
+		  ],
+		]);
+	 
+	 	// Save the node
+	  	$node->save();
+	 
+	  	$source = '/node/' . $node->get('nid')->value;
+	  	\Drupal::service('path.alias_storage')->save($source, '/product/'. str_replace(" ", "-", $node->get('title')->value), 'en');
+
+	  	$content_no++;
+
+	}
+}
+
+
+/**
+* Implements hook_uninstall().
+*/
+function sph_product_uninstall() {
+ // Load services.
+  $queryFactory = \Drupal::service('entity.query');
+  $nodeStorage  = \Drupal::entityManager()->getStorage('node');
+
+  // Query all entity.
+  $query = $queryFactory->get('node')
+    ->condition('type', 'sph_product'); // <-- Change the type here for yours.
+  $nids = $query->execute();
+
+  // Delete entities.
+  if (!empty($nids)) {
+    $entities = $nodeStorage->loadMultiple($nids);
+    $nodeStorage->delete($entities);
+  }
+
+}
